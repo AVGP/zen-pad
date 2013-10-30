@@ -1,0 +1,40 @@
+@-webkit-keyframes rollDown
+{
+  from { height:  0px; }
+  to   { height: 30px; }
+}
+
+@-webkit-keyframes rollUp
+{
+  from { height: 30px; }
+  to   { height:  0px; }
+}
+
+@keyframes rollDown
+{
+  from { height:  0px; }
+  to   { height: 30px; }
+}
+
+@keyframes rollUp
+{
+  from { height: 30px; }
+  to   { height:  0px; }
+}
+
+
+.hidden {
+  animation:           rollUp 1.5s;
+  animation-fill-mode:    forwards; 
+  
+  -webkit-animation:           rollUp 1.5s;
+  -webkit-animation-fill-mode:    forwards;  
+}
+
+.visible {
+  animation:           rollDown 1.5s; 
+  animation-fill-mode:      forwards;  
+
+  -webkit-animation:           rollDown 1.5s; 
+  -webkit-animation-fill-mode:      forwards;  
+}
