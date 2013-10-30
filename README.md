@@ -15,5 +15,8 @@ You can also just fork and implement whatever you like - I'd love to see your id
 If you create a pull request, that'd be great. Please commit as often as possible and don't change the version number yourself. I will keep track of that for you :)
 Please also make sure to rebase your changes with the master, if you haven't done so before.
 
+## Special thanks
+Very special thanks to the super great folks at [VisualPharm](http://www.visualpharm.com/) for the neat icon!
+
 ## License
 MIT
