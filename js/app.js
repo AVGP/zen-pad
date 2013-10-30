@@ -1,7 +1,13 @@
 var App = (function() {
   var self = {};
+  var navBar = document.querySelector("nav");
+  //Hide/Show the menu bar
+  document.body.addEventListener("mousemove", function(e) {
+    if(e.pageY < 30 && navBar.className === "hidden") navBar.className = "visible";
+    else if(e.pageY >= 30 && navBar.className === "visible") navBar.className = "hidden";
+  });
 
-  //Adding listeners
+  //Adding button event listeners
   document.getElementById("open").addEventListener("click", function() {
     chrome.fileSystem.chooseEntry({}, function(fileEntry) {
       fileEntry.file(function(file){
