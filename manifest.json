@@ -9,6 +9,6 @@
     }
   },
   "permissions": [
-    "fileSystem"
+    {"fileSystem": ["write"]} 
   ]
 }
