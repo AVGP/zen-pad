@@ -12,6 +12,8 @@ nav {
   overflow: hidden;
   
   background-color: #ddd;
+  background:       linear-gradient(#ddd, #888);
+  border-bottom:    2px solid #444;
 }
 
 #content {
