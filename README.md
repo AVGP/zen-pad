@@ -16,7 +16,7 @@ If you create a pull request, that'd be great. Please commit as often as possibl
 Please also make sure to rebase your changes with the master, if you haven't done so before.
 
 ## Special thanks
-Very special thanks to the super great folks at [VisualPharm](http://www.visualpharm.com/) for the neat icon!
+Very special thanks to the super great folks at [VisualPharm](http://www.visualpharm.com/) / [Icons8](http://www.icons8.com) for the neat icon!
 
 ## License
 MIT
