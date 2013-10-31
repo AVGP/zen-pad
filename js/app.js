@@ -3,9 +3,10 @@ var App = (function() {
   var navBar = document.querySelector("nav");
 
   ace.config.set("basePath", "js/ace");
-  var editor = ace.edit("content");
-  editor.setTheme("ace/theme/monokai");
-  editor.getSession().setMode("ace/mode/javascript");
+
+  self.editor = ace.edit("content");
+  self.editor.setTheme("ace/theme/monokai");
+  self.editor.getSession().setMode("ace/mode/javascript");
 
   //Hide/Show the menu bar
   document.body.addEventListener("mousemove", function(e) {
@@ -19,7 +20,7 @@ var App = (function() {
       fileEntry.file(function(file){
         var reader = new FileReader();
         reader.onload = function(e) {
-          document.getElementById("content").innerHTML = e.target.result;
+          self.editor.setValue(e.target.result);
         };
         reader.readAsText(file);
       });
@@ -38,7 +39,7 @@ var App = (function() {
           console.log("err", err, err.toString());
         }
       
-        var blob = new Blob([document.getElementById("content").innerText], {type: 'text/plain'});
+        var blob = new Blob([self.editor.getValue()], {type: 'text/plain'});
         fileWriter.write(blob);
       }, function(err) {
         console.log("shit", err);
