@@ -1,6 +1,12 @@
 var App = (function() {
   var self = {};
   var navBar = document.querySelector("nav");
+
+  ace.config.set("basePath", "js/ace");
+  var editor = ace.edit("content");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/javascript");
+
   //Hide/Show the menu bar
   document.body.addEventListener("mousemove", function(e) {
     if(e.pageY < 30 && navBar.className === "hidden") navBar.className = "visible";
