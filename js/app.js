@@ -14,37 +14,55 @@ var App = (function() {
     else if(e.pageY >= 30 && navBar.className === "visible") navBar.className = "hidden";
   });
 
+  //Helper functions
+  var loadFileEntryToEditor = function(fileEntry) {
+    fileEntry.file(function(file){
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        self.editor.setValue(e.target.result);
+      };
+      reader.readAsText(file);
+    });
+
+    self.currentFileEntry = fileEntry;
+  };
+
+  var saveEditorToFileEntry = function(fileEntry) {
+    fileEntry.createWriter(function(fileWriter) {
+      fileWriter.onwriteend = function() {
+        console.log("Writing DONE");
+      };
+
+      fileWriter.onerror = function(err) {
+        console.log("err", err, err.toString());
+      }
+
+      var blob = new Blob([self.editor.getValue()], {type: 'text/plain'});
+      fileWriter.write(blob);
+    }, function(err) {
+      console.log("shit", err);
+    });
+  };
+
   //Adding button event listeners
+  document.getElementById("new").addEventListener("click", function() {
+    self.currentFileEntry = null;
+    self.editor.setValue("");
+  });
+
   document.getElementById("open").addEventListener("click", function() {
-    chrome.fileSystem.chooseEntry({}, function(fileEntry) {
-      fileEntry.file(function(file){
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          self.editor.setValue(e.target.result);
-        };
-        reader.readAsText(file);
-      });
-      
-      self.currentFileEntry = fileEntry;
-    });    
+    chrome.fileSystem.chooseEntry({}, loadFileEntryToEditor);
   });
 
   document.getElementById("save").addEventListener("click", function() {
-    chrome.fileSystem.getWritableEntry(self.currentFileEntry, function(fileEntry) {
-      fileEntry.createWriter(function(fileWriter) {
-        fileWriter.onwriteend = function() {
-          console.log("Writing DONE");
-        };
-        fileWriter.onerror = function(err) {
-          console.log("err", err, err.toString());
-        }
-      
-        var blob = new Blob([self.editor.getValue()], {type: 'text/plain'});
-        fileWriter.write(blob);
-      }, function(err) {
-        console.log("shit", err);
+    if(!self.currentFileEntry) {
+      chrome.fileSystem.chooseEntry({type: "saveFile"}, function(fileEntry) {
+        self.currentFileEntry = fileEntry;
+        chrome.fileSystem.getWritableEntry(self.currentFileEntry, saveEditorToFileEntry);
       });
-    });
+    } else {
+      chrome.fileSystem.getWritableEntry(self.currentFileEntry, saveEditorToFileEntry);
+    }
   });
 
   // return the instance
