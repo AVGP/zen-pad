@@ -2,6 +2,24 @@ var App = (function() {
   var self = {};
   var navBar = document.querySelector("nav");
 
+  var SUPPORTED_MODES = {
+    "js"     : "javascript",
+    "html"   : "html",
+    "css"    : "css",
+    "coffee" : "coffee",
+    "cs"     : "csharp",
+    "go"     : "golang",
+    "java"   : "java",
+    "json"   : "json",
+    "md"     : "markdown",
+    "py"     : "python",
+    "rb"     : "ruby",
+    "sh"     : "sh",
+    "sql"    : "sql",
+    "xml"    : "xml",
+    "yml"    : "yaml"
+  };
+
   ace.config.set("basePath", "js/ace");
 
   self.editor = ace.edit("content");
@@ -15,6 +33,13 @@ var App = (function() {
   });
 
   //Helper functions
+  var setEditorModeForFileEntry = function(fileEntry) {
+    var extension = fileEntry.name.split('.').pop();
+    if(SUPPORTED_MODES[extension]) {
+      self.editor.getSession().setMode("ace/mode/" + SUPPORTED_MODES[extension]);
+    }
+  }
+  
   var loadFileEntryToEditor = function(fileEntry) {
     fileEntry.file(function(file){
       var reader = new FileReader();
@@ -25,6 +50,7 @@ var App = (function() {
     });
 
     self.currentFileEntry = fileEntry;
+    setEditorModeForFileEntry(fileEntry);
   };
 
   var saveEditorToFileEntry = function(fileEntry) {
