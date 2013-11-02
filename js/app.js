@@ -33,11 +33,15 @@ var App = (function() {
   });
 
   //Helper functions
+  var setEditorModeForLanguage = function(fileExt) {
+    if(SUPPORTED_MODES[fileExt]) {
+      self.editor.getSession().setMode("ace/mode/" + SUPPORTED_MODES[fileExt]);
+    }
+  }
+  
   var setEditorModeForFileEntry = function(fileEntry) {
     var extension = fileEntry.name.split('.').pop();
-    if(SUPPORTED_MODES[extension]) {
-      self.editor.getSession().setMode("ace/mode/" + SUPPORTED_MODES[extension]);
-    }
+    setEditorModeForLanguage(extension);
   }
   
   var loadFileEntryToEditor = function(fileEntry) {
@@ -84,6 +88,7 @@ var App = (function() {
     if(!self.currentFileEntry) {
       chrome.fileSystem.chooseEntry({type: "saveFile"}, function(fileEntry) {
         self.currentFileEntry = fileEntry;
+        setEditorModeForFileEntry(fileEntry);
         chrome.fileSystem.getWritableEntry(self.currentFileEntry, saveEditorToFileEntry);
       });
     } else {
