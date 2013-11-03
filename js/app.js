@@ -96,6 +96,16 @@ var App = (function() {
     }
   });
 
+  document.getElementById("mode").addEventListener("click", function() {
+    if(self.editor.getTheme() == "ace/theme/monokai") { //we are in dark mode
+      document.getElementById("mode").className = "off";
+      self.editor.setTheme("ace/theme/chrome");
+    } else { //we are in light mode
+      document.getElementById("mode").className = "on";
+      self.editor.setTheme("ace/theme/monokai");
+    }
+  });
+
   // return the instance
   return self;
 })();
