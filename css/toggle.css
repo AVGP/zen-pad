@@ -1,0 +1,9 @@
+.on {
+  background-color: #222;
+  color: #fff;
+}
+
+.off {
+  background-color: #fff;
+  color: #222;
+}
