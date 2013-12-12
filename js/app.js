@@ -60,7 +60,7 @@ var App = (function() {
   var saveEditorToFileEntry = function(fileEntry) {
     fileEntry.createWriter(function(fileWriter) {
       fileWriter.onwriteend = function() {
-        console.log("Writing DONE");
+        if(fileWriter.length == 0) fileWriter.write(blob);
       };
 
       fileWriter.onerror = function(err) {
@@ -68,7 +68,9 @@ var App = (function() {
       }
 
       var blob = new Blob([self.editor.getValue()], {type: 'text/plain'});
-      fileWriter.write(blob);
+      console.log(self.editor.getValue());
+      console.log(blob);
+      fileWriter.truncate(0);
     }, function(err) {
       console.log("shit", err);
     });
