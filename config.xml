@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "de.geekonaut.zengap"
+        versionCode = "10" 
+        version     = "1.0.0" >
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>ZenGap</name>
+
+    <description>
+        A PhoneGap version of Zen Pad
+    </description>
+
+    <author href="https://build.phonegap.com" email="the@geekonaut.de">
+        Martin Naumann
+    </author>
+
+    <gap:plugin name="com.phonegap.plugins.file" />   
+</widget>
