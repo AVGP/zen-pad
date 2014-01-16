@@ -19,5 +19,5 @@
         Martin Naumann
     </author>
 
-    <gap:plugin name="com.phonegap.plugins.file" />   
+    <feature name="http://api.phonegap.com/1.0/file"/>
 </widget>
